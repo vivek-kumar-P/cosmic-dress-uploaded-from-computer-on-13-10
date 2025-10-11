@@ -1,0 +1,716 @@
+# 🌟 Cosmic Dressing Repository Summary
+
+## 📋 Overview
+
+**Cosmic Dressing** is a cutting-edge web application that enables users to create, customize, and visualize outfits in stunning 3D. [0-cite-0](#0-cite-0) 
+
+The application combines 3D visualization with e-commerce functionality, allowing users to create virtual avatars, try on clothing items, and save their favorite outfit combinations.
+
+## 🛠️ Technology Stack
+
+### Core Technologies
+- **Frontend Framework**: Next.js 15.2.4 with App Router [0-cite-1](#0-cite-1) 
+- **UI Framework**: React 19 [0-cite-2](#0-cite-2) 
+- **3D Graphics**: Three.js for 3D visualization [0-cite-3](#0-cite-3) 
+- **Database & Auth**: Supabase (PostgreSQL) [0-cite-4](#0-cite-4) 
+- **Styling**: Tailwind CSS with shadcn/ui components [0-cite-5](#0-cite-5) 
+- **Animations**: Framer Motion and GSAP [0-cite-6](#0-cite-6) 
+- **Type Safety**: TypeScript [0-cite-7](#0-cite-7) 
+
+### Key Dependencies
+- **UI Components**: Radix UI primitives for accessible components [0-cite-8](#0-cite-8) 
+- **Form Handling**: React Hook Form with Zod validation [0-cite-9](#0-cite-9) 
+- **State Management**: React Context with local storage [0-cite-10](#0-cite-10) 
+
+## ✨ Key Features
+
+The application offers comprehensive functionality across multiple domains:
+
+### 3D Avatar & Visualization
+- **3D Avatar Customization**: Height, build, skin tone, and hair color options [0-cite-11](#0-cite-11) 
+- **Interactive 3D Scene**: Drag to rotate, scroll to zoom functionality [0-cite-12](#0-cite-12) 
+- **Virtual Clothing Try-On**: Shirts, pants, shoes with color customization [0-cite-13](#0-cite-13) 
+
+### Shopping Experience
+- **Product Catalog**: Browse and purchase items with shopping integration [0-cite-14](#0-cite-14) 
+- **Outfit Management**: Save and manage favorite looks [0-cite-15](#0-cite-15) 
+- **Cart & Checkout**: Complete e-commerce functionality
+
+### User Features
+- **User Authentication**: Secure login with email verification [0-cite-16](#0-cite-16) 
+- **Responsive Design**: Works on desktop, tablet, and mobile devices [0-cite-17](#0-cite-17) 
+- **Real-time Updates**: Instant visual feedback [0-cite-18](#0-cite-18) 
+
+## 📁 Project Structure
+
+### Main Directories
+
+**App Directory** (Next.js App Router pages):
+- `auth/` - Authentication pages (login, register)
+- `dashboard/` - User dashboard and protected routes
+- `3d-playground/` - 3D visualization playground
+- `gallery/` - Product browsing
+- `customize/` - Outfit customization
+- `cart/` & `checkout/` - Shopping functionality
+- `profile/` - User profile management
+- `api/` - API routes [0-cite-19](#0-cite-19) 
+
+**Components Directory**:
+- `ui/` - shadcn/ui components
+- `auth/` - Authentication components
+- `3d/` - 3D visualization components
+- `dashboard/`, `gallery/`, `profile/` - Feature-specific components
+- `cart/` - Shopping cart components
+- `layout/` - Navbar and footer [0-cite-20](#0-cite-20) 
+
+**Supporting Directories**:
+- `contexts/` - React contexts for state management [0-cite-21](#0-cite-21) 
+- `hooks/` - Custom React hooks [0-cite-22](#0-cite-22) 
+- `lib/` - Utility libraries [0-cite-23](#0-cite-23) 
+- `types/` - TypeScript type definitions [0-cite-24](#0-cite-24) 
+- `scripts/` - Database setup scripts [0-cite-25](#0-cite-25) 
+
+## 🗄️ Database Architecture
+
+### Core Schema Components
+
+**User Management**:
+- `profiles` - Extended user profiles with avatar and bio [0-cite-26](#0-cite-26) 
+- `user_preferences` - Theme and notification settings [0-cite-27](#0-cite-27) 
+
+**Product System**:
+- `categories` - Product categorization with hierarchy support [0-cite-28](#0-cite-28) 
+- `products` - Product catalog with pricing and metadata [0-cite-29](#0-cite-29) 
+- `product_variants` - Color and size variations with inventory [0-cite-30](#0-cite-30) 
+
+**3D Avatar System**:
+- `avatars` - User's 3D avatars with customization data [0-cite-31](#0-cite-31) 
+- `avatar_measurements` - Detailed body measurements [0-cite-32](#0-cite-32) 
+
+**Outfit Management**:
+- `saved_outfits` - User-created outfit combinations [0-cite-33](#0-cite-33) 
+- `outfit_items` - Products included in each outfit [0-cite-34](#0-cite-34) 
+
+**E-commerce**:
+- `cart_items` - Persistent shopping cart [0-cite-35](#0-cite-35) 
+- `orders` - Order tracking and management [0-cite-36](#0-cite-36) 
+- `order_items` - Individual items within orders [0-cite-37](#0-cite-37) 
+
+**Social Features**:
+- `outfit_likes`, `outfit_comments` - Social engagement
+- `user_follows` - User relationship tracking [0-cite-38](#0-cite-38) 
+
+## 🔒 Security & State Management
+
+### Security
+- **Row Level Security (RLS)**: Policies ensure users can only access their own data [0-cite-39](#0-cite-39) 
+- **Protected Routes**: Middleware guards dashboard and profile pages [0-cite-40](#0-cite-40) 
+
+### State Management Strategy
+- **Global State**: React Context for auth, cart, and 3D builder [0-cite-41](#0-cite-41) 
+- **Server State**: Supabase for persistent data
+- **Local State**: Component-level for UI and forms [0-cite-42](#0-cite-42) 
+
+## 🚀 Setup & Deployment
+
+### Prerequisites
+- Node.js 18 or higher
+- VS Code (recommended)
+- Supabase account
+- Git [0-cite-43](#0-cite-43) 
+
+### Quick Start
+1. Clone repository and install dependencies
+2. Setup environment variables (Supabase credentials)
+3. Run database setup scripts in order
+4. Start development server with `npm run dev` [0-cite-44](#0-cite-44) 
+
+### Deployment
+Recommended deployment to Vercel with environment variables configured for production [0-cite-45](#0-cite-45) 
+
+## 📊 User Flow
+
+### Main Journey
+1. **Landing Page** → Registration/Login → Email verification
+2. **Dashboard** → Access to profile, shopping, and creative tools
+3. **Gallery** → Browse products → Customize in 3D → Add to cart
+4. **3D Playground** → Create avatar → Build outfits → Save combinations
+5. **Checkout** → Complete purchase → Order tracking [0-cite-46](#0-cite-46) 
+
+## 📝 Notes
+
+This is a full-stack web application that combines modern web technologies (Next.js 15, React 19) with 3D visualization (Three.js) to create an immersive virtual try-on experience. The project uses a comprehensive database schema to support user management, product catalogs, 3D avatars, outfit creation, and e-commerce functionality.
+
+The codebase follows Next.js 14+ App Router conventions with a clear separation of concerns between pages, components, contexts, and utilities. Security is implemented through Supabase's Row Level Security policies, ensuring data privacy and access control.
+
+The application is designed to be responsive and performant, with optimization strategies including code splitting, image optimization, and database indexing [0-cite-47](#0-cite-47) .
+
+### Citations
+
+**File:** README.md (L3-3)
+```markdown
+A cutting-edge web application that lets users create, customize, and visualize outfits in stunning 3D. Built with Next.js, Three.js, and Supabase.
+```
+
+**File:** README.md (L7-10)
+```markdown
+- **Node.js** (version 18 or higher) - [Download here](https://nodejs.org/)
+- **VS Code** - [Download here](https://code.visualstudio.com/)
+- **Supabase Account** - [Sign up free](https://supabase.com/)
+- **Git** - [Download here](https://git-scm.com/)
+```
+
+**File:** README.md (L12-60)
+```markdown
+## ⚡ Quick Setup (5 minutes)
+
+### 1. Clone & Install
+\`\`\`bash
+# Clone the repository
+git clone <your-repo-url>
+cd 3d-outfit-builder
+
+# Install dependencies
+npm install
+\`\`\`
+
+### 2. Setup Environment Variables
+Create a `.env.local` file in your project root:
+
+\`\`\`bash
+# Copy the example file
+cp .env.example .env.local
+\`\`\`
+
+Add your Supabase credentials to `.env.local`:
+\`\`\`env
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key
+\`\`\`
+
+**Where to find these:**
+- Go to [Supabase Dashboard](https://supabase.com/dashboard)
+- Select your project → Settings → API
+- Copy the values from the "Project URL" and "API Keys" sections
+
+### 3. Setup Database
+In your Supabase dashboard, go to SQL Editor and run these scripts **in order**:
+
+1. `scripts/00-complete-database-setup.sql` - Creates all tables
+2. `scripts/16-add-missing-tables.sql` - Adds additional tables
+3. `scripts/14-add-onboarding-field.sql` - Adds user onboarding
+4. `scripts/15-optimize-rls-policies.sql` - Security policies
+5. `scripts/17-add-foreign-key-indexes.sql` - Performance indexes
+6. `scripts/18-optimize-profiles-indexes.sql` - Profile optimization
+7. `scripts/20-fix-storage-rls.sql` - Storage permissions
+
+### 4. Run the Application
+\`\`\`bash
+npm run dev
+\`\`\`
+
+Visit `http://localhost:3000` - You should see the landing page! 🎉
+```
+
+**File:** README.md (L171-184)
+```markdown
+### Deploy to Vercel (Recommended)
+1. Push your code to GitHub
+2. Visit [Vercel Dashboard](https://vercel.com/dashboard)
+3. Click "Import Project" → Select your GitHub repo
+4. Add environment variables in Vercel settings
+5. Deploy! 🎉
+
+### Environment Variables for Production
+Add these in your Vercel dashboard:
+\`\`\`
+NEXT_PUBLIC_SUPABASE_URL=your_production_supabase_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_production_anon_key
+SUPABASE_SERVICE_ROLE_KEY=your_production_service_role_key
+\`\`\`
+```
+
+**File:** README.md (L220-220)
+```markdown
+- **🎨 3D Avatar Customization** - Height, build, skin tone, hair color
+```
+
+**File:** README.md (L221-221)
+```markdown
+- **👕 Virtual Clothing** - Shirts, pants, shoes with color options
+```
+
+**File:** README.md (L222-222)
+```markdown
+- **🎮 Interactive 3D Scene** - Drag to rotate, scroll to zoom
+```
+
+**File:** README.md (L223-223)
+```markdown
+- **💾 Save Outfits** - Create and manage your favorite looks
+```
+
+**File:** README.md (L224-224)
+```markdown
+- **🔐 User Authentication** - Secure login with email verification
+```
+
+**File:** README.md (L225-225)
+```markdown
+- **📱 Responsive Design** - Works on desktop, tablet, and mobile
+```
+
+**File:** README.md (L226-226)
+```markdown
+- **⚡ Real-time Updates** - Instant visual feedback
+```
+
+**File:** README.md (L227-227)
+```markdown
+- **🛒 Shopping Integration** - Browse and purchase items
+```
+
+**File:** README.md (L235-235)
+```markdown
+- **TypeScript** - Type-safe development
+```
+
+**File:** package.json (L14-40)
+```json
+    "@radix-ui/react-accordion": "1.2.2",
+    "@radix-ui/react-alert-dialog": "1.1.4",
+    "@radix-ui/react-aspect-ratio": "1.1.1",
+    "@radix-ui/react-avatar": "latest",
+    "@radix-ui/react-checkbox": "latest",
+    "@radix-ui/react-collapsible": "1.1.2",
+    "@radix-ui/react-context-menu": "2.2.4",
+    "@radix-ui/react-dialog": "latest",
+    "@radix-ui/react-dropdown-menu": "latest",
+    "@radix-ui/react-hover-card": "1.1.4",
+    "@radix-ui/react-label": "latest",
+    "@radix-ui/react-menubar": "1.1.4",
+    "@radix-ui/react-navigation-menu": "1.2.3",
+    "@radix-ui/react-popover": "1.1.4",
+    "@radix-ui/react-progress": "latest",
+    "@radix-ui/react-radio-group": "1.2.2",
+    "@radix-ui/react-scroll-area": "1.2.2",
+    "@radix-ui/react-select": "latest",
+    "@radix-ui/react-separator": "latest",
+    "@radix-ui/react-slider": "latest",
+    "@radix-ui/react-slot": "latest",
+    "@radix-ui/react-switch": "latest",
+    "@radix-ui/react-tabs": "latest",
+    "@radix-ui/react-toast": "latest",
+    "@radix-ui/react-toggle": "1.1.1",
+    "@radix-ui/react-toggle-group": "1.1.1",
+    "@radix-ui/react-tooltip": "latest",
+```
+
+**File:** package.json (L54-54)
+```json
+    "next": "15.2.4",
+```
+
+**File:** package.json (L56-56)
+```json
+    "react": "^19",
+```
+
+**File:** package.json (L59-67)
+```json
+    "react-hook-form": "^7.54.1",
+    "react-resizable-panels": "^2.1.7",
+    "recharts": "latest",
+    "sonner": "latest",
+    "tailwind-merge": "^2.5.5",
+    "tailwindcss-animate": "^1.0.7",
+    "three": "latest",
+    "vaul": "^0.9.6",
+    "zod": "^3.24.1"
+```
+
+**File:** ARCHITECTURE.md (L7-7)
+```markdown
+- **Styling**: Tailwind CSS + shadcn/ui
+```
+
+**File:** ARCHITECTURE.md (L8-8)
+```markdown
+- **Database**: Supabase (PostgreSQL)
+```
+
+**File:** ARCHITECTURE.md (L10-10)
+```markdown
+- **State Management**: React Context + Local Storage
+```
+
+**File:** ARCHITECTURE.md (L11-11)
+```markdown
+- **Animations**: Framer Motion + GSAP
+```
+
+**File:** ARCHITECTURE.md (L18-37)
+```markdown
+├── app/                          # Next.js App Router pages
+│   ├── (auth)/                   # Auth route group
+│   │   ├── login/
+│   │   └── register/
+│   ├── (dashboard)/              # Protected dashboard routes
+│   │   ├── dashboard/
+│   │   ├── profile/
+│   │   └── settings/
+│   ├── (shop)/                   # Shopping experience
+│   │   ├── gallery/
+│   │   ├── customize/
+│   │   ├── cart/
+│   │   └── checkout/
+│   ├── (studio)/                 # Creative tools
+│   │   ├── 3d-playground/
+│   │   └── outfit-picker/
+│   ├── api/                      # API routes
+│   ├── globals.css
+│   ├── layout.tsx
+│   └── page.tsx                  # Landing page
+```
+
+**File:** ARCHITECTURE.md (L38-46)
+```markdown
+├── components/                   # Reusable components
+│   ├── ui/                       # shadcn/ui components
+│   ├── auth/                     # Authentication components
+│   ├── dashboard/                # Dashboard-specific components
+│   ├── gallery/                  # Gallery components
+│   ├── profile/                  # Profile components
+│   ├── cart/                     # Shopping cart components
+│   ├── 3d/                       # 3D visualization components
+│   └── layout/                   # Layout components (navbar, footer)
+```
+
+**File:** ARCHITECTURE.md (L47-47)
+```markdown
+├── contexts/                     # React contexts
+```
+
+**File:** ARCHITECTURE.md (L48-48)
+```markdown
+├── hooks/                        # Custom hooks
+```
+
+**File:** ARCHITECTURE.md (L49-49)
+```markdown
+├── lib/                          # Utility libraries
+```
+
+**File:** ARCHITECTURE.md (L50-50)
+```markdown
+├── types/                        # TypeScript type definitions
+```
+
+**File:** ARCHITECTURE.md (L51-51)
+```markdown
+└── scripts/                      # Database scripts
+```
+
+**File:** ARCHITECTURE.md (L61-69)
+```markdown
+profiles (
+  id UUID PRIMARY KEY REFERENCES auth.users(id),
+  username TEXT UNIQUE,
+  full_name TEXT,
+  avatar_url TEXT,
+  bio TEXT,
+  created_at TIMESTAMP,
+  updated_at TIMESTAMP
+)
+```
+
+**File:** ARCHITECTURE.md (L72-79)
+```markdown
+user_preferences (
+  id UUID PRIMARY KEY,
+  user_id UUID REFERENCES profiles(id),
+  theme TEXT DEFAULT 'dark',
+  notifications JSONB,
+  privacy_settings JSONB
+)
+\`\`\`
+```
+
+**File:** ARCHITECTURE.md (L84-92)
+```markdown
+categories (
+  id UUID PRIMARY KEY,
+  name TEXT NOT NULL,
+  slug TEXT UNIQUE,
+  description TEXT,
+  image_url TEXT,
+  parent_id UUID REFERENCES categories(id),
+  sort_order INTEGER
+)
+```
+
+**File:** ARCHITECTURE.md (L95-109)
+```markdown
+products (
+  id UUID PRIMARY KEY,
+  name TEXT NOT NULL,
+  description TEXT,
+  price DECIMAL(10,2),
+  category_id UUID REFERENCES categories(id),
+  brand TEXT,
+  colors JSONB,
+  sizes JSONB,
+  tags TEXT[],
+  model_url TEXT,
+  images JSONB,
+  is_active BOOLEAN DEFAULT true,
+  created_at TIMESTAMP
+)
+```
+
+**File:** ARCHITECTURE.md (L112-122)
+```markdown
+product_variants (
+  id UUID PRIMARY KEY,
+  product_id UUID REFERENCES products(id),
+  sku TEXT UNIQUE,
+  color TEXT,
+  size TEXT,
+  price DECIMAL(10,2),
+  stock_quantity INTEGER,
+  model_url TEXT
+)
+\`\`\`
+```
+
+**File:** ARCHITECTURE.md (L127-135)
+```markdown
+avatars (
+  id UUID PRIMARY KEY,
+  user_id UUID REFERENCES profiles(id),
+  name TEXT NOT NULL,
+  avatar_data JSONB, -- 3D model configuration
+  measurements JSONB,
+  is_default BOOLEAN DEFAULT false,
+  created_at TIMESTAMP
+)
+```
+
+**File:** ARCHITECTURE.md (L138-145)
+```markdown
+avatar_measurements (
+  id UUID PRIMARY KEY,
+  avatar_id UUID REFERENCES avatars(id),
+  measurement_type TEXT, -- height, chest, waist, etc.
+  value DECIMAL(5,2),
+  unit TEXT DEFAULT 'cm'
+)
+\`\`\`
+```
+
+**File:** ARCHITECTURE.md (L150-161)
+```markdown
+saved_outfits (
+  id UUID PRIMARY KEY,
+  user_id UUID REFERENCES profiles(id),
+  avatar_id UUID REFERENCES avatars(id),
+  name TEXT NOT NULL,
+  description TEXT,
+  is_public BOOLEAN DEFAULT false,
+  tags TEXT[],
+  thumbnail_url TEXT,
+  created_at TIMESTAMP,
+  updated_at TIMESTAMP
+)
+```
+
+**File:** ARCHITECTURE.md (L164-172)
+```markdown
+outfit_items (
+  id UUID PRIMARY KEY,
+  outfit_id UUID REFERENCES saved_outfits(id),
+  product_id UUID REFERENCES products(id),
+  variant_id UUID REFERENCES product_variants(id),
+  position_data JSONB, -- 3D positioning
+  customization_data JSONB -- colors, adjustments
+)
+\`\`\`
+```
+
+**File:** ARCHITECTURE.md (L177-184)
+```markdown
+cart_items (
+  id UUID PRIMARY KEY,
+  user_id UUID REFERENCES profiles(id),
+  product_id UUID REFERENCES products(id),
+  variant_id UUID REFERENCES product_variants(id),
+  quantity INTEGER DEFAULT 1,
+  added_at TIMESTAMP
+)
+```
+
+**File:** ARCHITECTURE.md (L187-196)
+```markdown
+orders (
+  id UUID PRIMARY KEY,
+  user_id UUID REFERENCES profiles(id),
+  status TEXT DEFAULT 'pending',
+  total_amount DECIMAL(10,2),
+  shipping_address JSONB,
+  billing_address JSONB,
+  created_at TIMESTAMP
+)
+
+```
+
+**File:** ARCHITECTURE.md (L199-207)
+```markdown
+  id UUID PRIMARY KEY,
+  order_id UUID REFERENCES orders(id),
+  product_id UUID REFERENCES products(id),
+  variant_id UUID REFERENCES product_variants(id),
+  quantity INTEGER,
+  unit_price DECIMAL(10,2),
+  total_price DECIMAL(10,2)
+)
+\`\`\`
+```
+
+**File:** ARCHITECTURE.md (L210-237)
+```markdown
+\`\`\`sql
+-- Outfit likes
+outfit_likes (
+  id UUID PRIMARY KEY,
+  user_id UUID REFERENCES profiles(id),
+  outfit_id UUID REFERENCES saved_outfits(id),
+  created_at TIMESTAMP,
+  UNIQUE(user_id, outfit_id)
+)
+
+-- Comments
+outfit_comments (
+  id UUID PRIMARY KEY,
+  user_id UUID REFERENCES profiles(id),
+  outfit_id UUID REFERENCES saved_outfits(id),
+  content TEXT NOT NULL,
+  created_at TIMESTAMP
+)
+
+-- User follows
+user_follows (
+  id UUID PRIMARY KEY,
+  follower_id UUID REFERENCES profiles(id),
+  following_id UUID REFERENCES profiles(id),
+  created_at TIMESTAMP,
+  UNIQUE(follower_id, following_id)
+)
+\`\`\`
+```
+
+**File:** ARCHITECTURE.md (L239-264)
+```markdown
+## 🔗 Page Flow & Navigation
+
+### 1. Authentication Flow
+\`\`\`
+Landing Page (/) 
+    ↓
+Register (/auth/register) → Email Confirmation → Login
+    ↓
+Login (/auth/login) → Dashboard (/dashboard)
+\`\`\`
+
+### 2. Main User Journey
+\`\`\`
+Dashboard (/dashboard)
+    ├── Profile Management (/profile)
+    │   ├── Settings (/profile/settings)
+    │   └── Saved Outfits (/profile/outfits)
+    ├── Shopping Experience
+    │   ├── Gallery (/gallery) → Product Details
+    │   ├── Customize (/customize) → 3D Builder
+    │   ├── Cart (/cart) → Checkout (/checkout)
+    │   └── Order History (/orders)
+    └── Creative Tools
+        ├── 3D Playground (/3d-playground)
+        └── Outfit Picker (/outfit-picker)
+\`\`\`
+```
+
+**File:** ARCHITECTURE.md (L331-349)
+```markdown
+\`\`\`typescript
+// Authentication State
+AuthContext: {
+  user, session, isAuthenticated,
+  signIn, signUp, signOut, updateProfile
+}
+
+// Shopping Cart State
+CartContext: {
+  items, totalItems, totalPrice,
+  addItem, removeItem, updateQuantity, clearCart
+}
+
+// 3D Builder State
+BuilderContext: {
+  selectedAvatar, selectedItems, currentOutfit,
+  updateAvatar, addItem, removeItem, saveOutfit
+}
+\`\`\`
+```
+
+**File:** ARCHITECTURE.md (L351-355)
+```markdown
+### 2. Local State (Component Level)
+- Form states
+- UI states (modals, dropdowns)
+- Temporary selections
+- Animation states
+```
+
+**File:** ARCHITECTURE.md (L367-371)
+```markdown
+-- Profiles: Users can only see/edit their own profile
+-- Outfits: Users can see public outfits + their own private ones
+-- Cart: Users can only access their own cart
+-- Orders: Users can only see their own orders
+\`\`\`
+```
+
+**File:** ARCHITECTURE.md (L375-379)
+```markdown
+// Middleware for protected routes
+middleware.ts: {
+  matcher: ['/dashboard/:path*', '/profile/:path*', '/api/protected/:path*']
+}
+\`\`\`
+```
+
+**File:** ARCHITECTURE.md (L398-419)
+```markdown
+## 🚀 Performance Optimization
+
+### 1. Code Splitting
+\`\`\`typescript
+// Route-based splitting (automatic with App Router)
+// Component-based splitting
+const HeavyComponent = lazy(() => import('./HeavyComponent'))
+\`\`\`
+
+### 2. Image Optimization
+\`\`\`typescript
+// Next.js Image component
+// Supabase Storage for user uploads
+// CDN for product images
+\`\`\`
+
+### 3. Database Optimization
+\`\`\`sql
+-- Indexes on frequently queried columns
+-- Pagination for large datasets
+-- Caching strategies
+\`\`\`
+```

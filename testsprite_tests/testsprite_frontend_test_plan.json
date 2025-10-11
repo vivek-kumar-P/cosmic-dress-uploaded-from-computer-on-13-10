@@ -1,0 +1,550 @@
+[
+  {
+    "id": "TC001",
+    "title": "User Registration with Email Verification",
+    "description": "Verify that a new user can register with valid credentials and complete email verification successfully.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the registration page."
+      },
+      {
+        "type": "action",
+        "description": "Input valid user details including email and password."
+      },
+      {
+        "type": "action",
+        "description": "Submit the registration form."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify that confirmation email is sent to the registered email."
+      },
+      {
+        "type": "action",
+        "description": "Simulate clicking the verification link from the email."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify user account is activated and user is redirected to onboarding or login."
+      }
+    ]
+  },
+  {
+    "id": "TC002",
+    "title": "Login with Correct Credentials",
+    "description": "Ensure users can log in successfully with valid email and password.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the login page."
+      },
+      {
+        "type": "action",
+        "description": "Enter a valid registered email and password."
+      },
+      {
+        "type": "action",
+        "description": "Submit login form."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify user is authenticated and redirected to the dashboard."
+      }
+    ]
+  },
+  {
+    "id": "TC003",
+    "title": "Login Failure with Invalid Credentials",
+    "description": "Confirm that login fails when invalid email or password is provided.",
+    "category": "error handling",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the login page."
+      },
+      {
+        "type": "action",
+        "description": "Enter an invalid email or password."
+      },
+      {
+        "type": "action",
+        "description": "Submit login form."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify error message is displayed and access is denied."
+      }
+    ]
+  },
+  {
+    "id": "TC004",
+    "title": "3D Avatar Attribute Customization",
+    "description": "Validate users can customize head-to-toe avatar attributes (height, build, skin tone, hair color) and changes update in real time.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Login and navigate to the 3D avatar customization playground."
+      },
+      {
+        "type": "action",
+        "description": "Modify height, build, skin tone, and hair color attributes via UI controls."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the 3D avatar model updates instantly to reflect each attribute change accurately."
+      },
+      {
+        "type": "action",
+        "description": "Save the customized avatar."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the avatar attributes are persisted in the user profile database and reload correctly on revisit."
+      }
+    ]
+  },
+  {
+    "id": "TC005",
+    "title": "3D Avatar Interaction Controls",
+    "description": "Ensure users can drag, rotate, and zoom the 3D avatar models smoothly without glitches.",
+    "category": "functional",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Open 3D avatar playground page."
+      },
+      {
+        "type": "action",
+        "description": "Perform drag action to reposition avatar in scene."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify avatar moves smoothly corresponding to drag input."
+      },
+      {
+        "type": "action",
+        "description": "Use mouse wheel or touch gesture to zoom in and out."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify zoom operations adjust avatar size fluidly and stay within valid bounds."
+      },
+      {
+        "type": "action",
+        "description": "Rotate the avatar using rotation controls."
+      },
+      {
+        "type": "assertion",
+        "description": "Avatar rotates smoothly with no visual artifacts."
+      }
+    ]
+  },
+  {
+    "id": "TC006",
+    "title": "Virtual Clothing Selection and Color Customization",
+    "description": "Validate the workflow for selecting clothing items (shirts, pants, shoes) and customizing their color variants.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the product catalog and filter to clothing category."
+      },
+      {
+        "type": "action",
+        "description": "Select a product and open customization options."
+      },
+      {
+        "type": "action",
+        "description": "Choose different color variants for the selected clothing item."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the 3D outfit preview updates in real time to reflect color changes."
+      },
+      {
+        "type": "action",
+        "description": "Add multiple clothing items to the avatar outfit."
+      },
+      {
+        "type": "assertion",
+        "description": "Ensure all selected items are correctly displayed together on the 3D avatar."
+      }
+    ]
+  },
+  {
+    "id": "TC007",
+    "title": "Product Catalog Filters and Pagination",
+    "description": "Confirm the product catalog filters (category, color, size) work correctly and product listings update accordingly, including pagination handling.",
+    "category": "functional",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to product catalog page."
+      },
+      {
+        "type": "action",
+        "description": "Apply filters such as category=shirts, color=blue, size=medium."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify only products matching all filters are displayed."
+      },
+      {
+        "type": "action",
+        "description": "Navigate through pages using pagination controls."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify products display correctly on each page and filter settings persist."
+      }
+    ]
+  },
+  {
+    "id": "TC008",
+    "title": "Shopping Cart Persistence Across Sessions",
+    "description": "Test that the shopping cart preserves added items and quantities when user logs out and logs back in.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Log in and add several products with different quantities to the shopping cart."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify cart contents and quantities appear correctly in the cart UI."
+      },
+      {
+        "type": "action",
+        "description": "Log out and log back in with the same user account."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify previously added cart items and quantities are restored correctly."
+      },
+      {
+        "type": "action",
+        "description": "Remove an item from the cart and update quantities."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify cart updates persist after page reload."
+      }
+    ]
+  },
+  {
+    "id": "TC009",
+    "title": "Checkout Flow Completeness and Validation",
+    "description": "Verify that checkout form validates input fields properly and the order completes with confirmation.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to the checkout page with a valid cart."
+      },
+      {
+        "type": "action",
+        "description": "Enter valid shipping and payment details and submit the form."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify order confirmation page is displayed."
+      },
+      {
+        "type": "action",
+        "description": "Repeat checkout with invalid or incomplete form fields."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify appropriate validation error messages are shown and submission is prevented."
+      }
+    ]
+  },
+  {
+    "id": "TC010",
+    "title": "Save and Retrieve Outfit Combinations",
+    "description": "Test that users can save customized outfit combinations and later retrieve them linked to their profiles and avatars.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Create a customized outfit combination using the outfit picker."
+      },
+      {
+        "type": "action",
+        "description": "Save the outfit and reload the user profile page."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the saved outfit appears in the saved outfits list."
+      },
+      {
+        "type": "action",
+        "description": "Select the saved outfit to preview."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify outfit preview correctly loads all associated clothing items and avatar details."
+      }
+    ]
+  },
+  {
+    "id": "TC011",
+    "title": "Access Control for Protected Routes",
+    "description": "Ensure authenticated-only routes block unauthorized users and redirect them appropriately.",
+    "category": "security",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Attempt to access protected dashboard, profile, and checkout pages as a guest (not logged in)."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify access is denied and user is redirected to login."
+      },
+      {
+        "type": "action",
+        "description": "Log in as a valid user and reaccess the same protected routes."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify user can access protected pages without restriction."
+      }
+    ]
+  },
+  {
+    "id": "TC012",
+    "title": "Row Level Security Enforcement",
+    "description": "Verify database Row Level Security policies effectively restrict user access to only their own data.",
+    "category": "security",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Log in as User A and request profile, outfits, and order data."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify only User A’s data is accessible."
+      },
+      {
+        "type": "action",
+        "description": "Attempt to access User B’s data by manipulating API endpoints or database queries."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify access is denied per RLS policy."
+      }
+    ]
+  },
+  {
+    "id": "TC013",
+    "title": "Responsive Design across Devices",
+    "description": "Check that all key pages (landing, dashboard, catalog, profile, 3D playground) render and function correctly on desktop, tablet, and mobile screen sizes.",
+    "category": "ui",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Open application pages on desktop browser and verify layout and functionality."
+      },
+      {
+        "type": "action",
+        "description": "Repeat on tablet viewport size and ensure UI elements adapt properly."
+      },
+      {
+        "type": "action",
+        "description": "Test on mobile viewport including touch gestures and navigation menu."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify no broken layouts, truncated text, or unusable controls across all devices."
+      }
+    ]
+  },
+  {
+    "id": "TC014",
+    "title": "Real-time Updates in Dashboard Analytics",
+    "description": "Validate that analytics charts and data refresh in real time without latency or application errors.",
+    "category": "functional",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Log in and navigate to dashboard analytics page."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify initial display of analytics summaries and graphs."
+      },
+      {
+        "type": "action",
+        "description": "Trigger data changes (e.g., add new outfits or orders) and observe dashboard updates."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify updated data is reflected in charts and analytics components without page reload."
+      }
+    ]
+  },
+  {
+    "id": "TC015",
+    "title": "UI Animations and Performance",
+    "description": "Ensure all animations powered by Framer Motion and GSAP execute smoothly without observable performance degradation on typical user actions.",
+    "category": "ui",
+    "priority": "Low",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate through main UI components with animations such as menu transitions, product gallery effects, and onboarding steps."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify animations appear smooth, no janks or delays occur, and no crashes or UI freezes."
+      }
+    ]
+  },
+  {
+    "id": "TC016",
+    "title": "Onboarding Flow Completion and Data Integrity",
+    "description": "Verify new users complete the onboarding steps and their profile data is saved correctly with flags indicating onboarding completion.",
+    "category": "functional",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Register a new user and follow onboarding flow steps."
+      },
+      {
+        "type": "action",
+        "description": "Complete all onboarding steps and submit final data."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify user profile updates with onboarding completion flags in database."
+      },
+      {
+        "type": "action",
+        "description": "Log out and log back in as the same user."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify onboarding flow is not prompted again."
+      }
+    ]
+  },
+  {
+    "id": "TC017",
+    "title": "Outfit Sharing and Access Permissions",
+    "description": "Test that saved outfit combinations can be shared via appropriate links or access controls and only authorized users can view shared outfits.",
+    "category": "security",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Save an outfit combination and generate a shareable link."
+      },
+      {
+        "type": "action",
+        "description": "Access the link in an authenticated session not belonging to the owner."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify sharing permissions are respected; access granted or denied based on settings."
+      },
+      {
+        "type": "action",
+        "description": "Access the link as the owner user."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify full access and editing capabilities are available."
+      }
+    ]
+  },
+  {
+    "id": "TC018",
+    "title": "Error Handling for Failed Network Requests",
+    "description": "Validate that the application gracefully handles and displays error messages for failed API calls including product catalog, checkout, and avatar save operations.",
+    "category": "error handling",
+    "priority": "Medium",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Simulate network failures or server errors for API endpoints."
+      },
+      {
+        "type": "action",
+        "description": "Perform actions such as loading product lists, submitting checkout, and saving avatars."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify user-friendly error messages are shown and app state remains stable."
+      }
+    ]
+  },
+  {
+    "id": "TC019",
+    "title": "Database Schema and Migration Verification",
+    "description": "Ensure SQL scripts for table creation, RLS policies, and indexes apply correctly and the database starts in a consistent state.",
+    "category": "functional",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Run all provided SQL migration and setup scripts sequentially on a blank database."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify all tables, indexes, and RLS policies are created as expected with no errors."
+      },
+      {
+        "type": "action",
+        "description": "Insert sample data and validate constraints and permissions."
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm data integrity and RLS enforcement."
+      }
+    ]
+  },
+  {
+    "id": "TC020",
+    "title": "Secure Supabase Authentication Integration",
+    "description": "Verify Supabase authentication integration including safe helpers, server-side rendering support, and proper token management.",
+    "category": "security",
+    "priority": "High",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Perform sign-in and sign-out flows with Supabase auth client."
+      },
+      {
+        "type": "assertion",
+        "description": "Verify tokens are securely stored and cleared on logout."
+      },
+      {
+        "type": "action",
+        "description": "Access protected API routes with and without valid tokens."
+      },
+      {
+        "type": "assertion",
+        "description": "Confirm access is granted only with valid authentication and denied otherwise."
+      }
+    ]
+  }
+]

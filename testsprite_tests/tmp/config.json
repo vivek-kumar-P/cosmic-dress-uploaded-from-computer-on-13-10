@@ -1,0 +1,16 @@
+{
+  "status": "commited",
+  "type": "frontend",
+  "scope": "codebase",
+  "localEndpoint": "http://localhost:5174",
+  "executionArgs": {
+    "projectName": "cosmic-dressing-main",
+    "projectPath": "e:\\FY_project_trials\\cosmic-dressing-main",
+    "testIds": [],
+    "additionalInstruction": "Rerun auth-related and gallery UI tests after fixes; prioritize login, forgot-password, hydration.",
+    "envs": {
+      "API_KEY": "sk-user-HwAqjjFTcOFudGJpDX4bjwtUNen9pKojoQveiiLUKU5oSpObPy-ueCN1zYtwEoQEzL2_5D7041A3wqREzxcyYP3HkZpdfKFYzEKxjhYypedLtXYRwvc9wh7wwA9V_qxXBik"
+    }
+  },
+  "proxy": "http://f25e540e-9feb-494e-8721-6d57de3a5931:ZgbQhvFDk9dSyAkeIoXbRNVfzPDjXI7j@tun.testsprite.com:8080"
+}

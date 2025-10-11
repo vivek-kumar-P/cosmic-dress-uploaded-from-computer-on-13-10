@@ -1,0 +1,17 @@
+Review my Supabase project's database, focusing on all tables mentioned in the performance warnings (such as outfit_items, order_items, avatar_measurements, orders, favorites, avatars, saved_outfits, profiles):
+
+For all Row Level Security (RLS) policies, replace auth.<function>() and current_setting() calls with their recommended form:
+
+Use (select auth.<function>()) instead of directly calling auth.<function>() in RLS policies, as per performance best practices (see Supabase docs).
+
+This avoids unnecessary re-evaluation for every row and boosts query performance.
+
+For any table (especially profiles) with multiple permissive policies for the same role-action (e.g., multiple insert/select/update policies), consolidate them by merging logic into a single, efficient policy per action and role to minimize redundant checks.
+
+After implementing, ensure:
+
+There are no remaining warnings about RLS policy evaluation or multiple permissive policies.
+
+The app functions securely and efficiently, supporting all expected permissions and behaviors.
+
+Return all revised SQL policy statements or migration scripts and a short summary of changes made.

@@ -1,0 +1,202 @@
+{
+  "meta": {
+    "project": "Cosmic Dressing",
+    "date": "2025-10-04",
+    "prepared_by": "Software Development Manager"
+  },
+  "product_overview": "Cosmic Dressing is a cutting-edge web application that allows users to create, customize, and visualize outfits on 3D avatars. It combines immersive 3D visualization with comprehensive e-commerce functionality to enable virtual try-ons, outfit saving, and secure shopping experiences.",
+  "core_goals": [
+    "Provide an interactive 3D avatar and outfit customization experience with real-time visual feedback.",
+    "Enable users to browse, select, and purchase fashion products integrated with 3D outfit building.",
+    "Offer secure user authentication and personalized profile management.",
+    "Ensure a seamless multi-platform responsive design for desktop, tablet, and mobile users.",
+    "Implement robust state management and data privacy with Supabase and React Context.",
+    "Optimize performance through code splitting, image optimization, and database indexing."
+  ],
+  "key_features": [
+    "3D Avatar Customization with options for height, build, skin tone, and hair color.",
+    "Interactive 3D scene supporting drag to rotate and scroll to zoom functionalities.",
+    "Virtual clothing try-on with customizable shirts, pants, shoes, and color selections.",
+    "User authentication with secure email login and verification flows.",
+    "Product catalog browsing with detailed product and variant views.",
+    "Outfit creation, saving, and management including public/private options and outfit social features (likes, comments).",
+    "Shopping cart and checkout flow with persistent cart state management.",
+    "User profile and settings management within a protected dashboard environment.",
+    "Guided onboarding flow and engaging landing page components to facilitate user adoption.",
+    "Global state management using React Context for authentication, cart, and 3D builder states.",
+    "Responsive UI styled with Tailwind CSS and accessible Radix UI primitives.",
+    "API health checks and middleware-protected routes to secure sensitive pages."
+  ],
+  "user_flow_summary": [
+    "Users land on the homepage and proceed to register or login using email-based authentication with verification.",
+    "After login, users access the Dashboard to manage their profile, view saved outfits, and customize avatars.",
+    "Users browse the product Gallery, explore product details, and select items to customize in the 3D builder.",
+    "Within the 3D Playground, users create and preview outfits on avatars with real-time customization.",
+    "Users add selected outfit items to their cart and proceed through the checkout process to complete purchases.",
+    "Profile and settings pages allow users to update personal information and manage preferences.",
+    "Protected routes restrict dashboard, profile, and checkout areas to authenticated users only."
+  ],
+  "validation_criteria": [
+    "All authentication flows complete successfully with email verification and secure session management.",
+    "3D outfit creation and avatar customization reflect user inputs accurately with no rendering errors.",
+    "Product browsing and filtering work correctly with loading states and responsive layouts.",
+    "Cart updates, quantity changes, and checkout submissions are processed accurately with persistent state.",
+    "User profile updates and settings changes persist and reflect immediately in the UI.",
+    "Security policies enforce correct access control restricting user data to respective owners only.",
+    "Performance benchmarks meet responsive and fast load criteria across supported devices.",
+    "API health check endpoint responds correctly indicating server readiness."
+  ],
+  "code_summary": {
+    "tech_stack": [
+      "TypeScript",
+      "Next.js 15",
+      "React 19",
+      "Tailwind CSS",
+      "Supabase (auth + DB)",
+      "Radix UI",
+      "Three.js",
+      "Zod"
+    ],
+    "features": [
+      {
+        "name": "Authentication flows",
+        "description": "Email-based auth with Supabase; login, register, callback, confirm routes and protected route component.",
+        "files": [
+          "app/auth/login/page.tsx",
+          "app/auth/register/page.tsx",
+          "app/auth/callback/route.ts",
+          "app/auth/confirm/page.tsx",
+          "app/auth/confirm/loading.tsx",
+          "components/auth/login-form.tsx",
+          "components/auth/register-form.tsx",
+          "components/auth/protected-route.tsx",
+          "contexts/auth-context.tsx",
+          "app/actions/auth-actions.ts"
+        ]
+      },
+      {
+        "name": "Supabase client utilities",
+        "description": "Typed Supabase clients for browser and server with safe checks and helpers.",
+        "files": [
+          "lib/supabase.ts",
+          "lib/supabase-server.ts",
+          "lib/supabase-safe.ts",
+          "types/supabase.ts"
+        ]
+      },
+      {
+        "name": "Outfit creation and preview",
+        "description": "Create, customize, and preview outfits including 3D model integrations and combinations.",
+        "files": [
+          "app/dashboard/create-outfit/page.tsx",
+          "components/outfit-preview.tsx",
+          "components/outfit-combination-view.tsx",
+          "components/outfit-picker.tsx",
+          "app/preview/page.tsx",
+          "app/outfit-picker/page.tsx",
+          "app/customize/page.tsx",
+          "app/actions/outfit-actions.ts"
+        ]
+      },
+      {
+        "name": "3D models and playground",
+        "description": "Three.js model viewers for avatar and products, plus a playground page.",
+        "files": [
+          "components/3d/avatar-model.tsx",
+          "components/3d/product-model-viewer.tsx",
+          "components/3d-playground/avatar-playground.tsx",
+          "components/three-d-playground.tsx",
+          "app/3d-playground/page.tsx"
+        ]
+      },
+      {
+        "name": "Gallery and product listing",
+        "description": "Gallery grid with filters and loading states; product list and product detail route.",
+        "files": [
+          "app/gallery/page.tsx",
+          "app/gallery/loading.tsx",
+          "components/gallery/gallery-grid.tsx",
+          "components/gallery/gallery-filters.tsx",
+          "components/gallery/gallery-header.tsx",
+          "app/products/page.tsx",
+          "app/products/loading.tsx",
+          "app/products/[id]/page.tsx"
+        ]
+      },
+      {
+        "name": "Cart and checkout",
+        "description": "Cart context and pages with a checkout form.",
+        "files": [
+          "contexts/cart-context.tsx",
+          "app/cart/page.tsx",
+          "app/checkout/page.tsx",
+          "components/cart/cart-page.tsx",
+          "components/checkout-form.tsx"
+        ]
+      },
+      {
+        "name": "User profile and settings",
+        "description": "Profile header, tabs, saved outfits, and settings pages in dashboard and profile.",
+        "files": [
+          "app/profile/page.tsx",
+          "app/profile/settings/page.tsx",
+          "app/dashboard/page.tsx",
+          "app/dashboard/settings/page.tsx",
+          "app/dashboard/settings/settings-client-page.tsx",
+          "components/profile/profile-header.tsx",
+          "components/profile/profile-tabs.tsx",
+          "components/profile/saved-outfits.tsx",
+          "components/profile/settings-tabs.tsx"
+        ]
+      },
+      {
+        "name": "Onboarding flow",
+        "description": "Guided onboarding experience and landing sections.",
+        "files": [
+          "app/onboarding/page.tsx",
+          "components/onboarding/onboarding-flow.tsx",
+          "components/landing-hero.tsx",
+          "components/how-it-works.tsx",
+          "components/feature-cards.tsx",
+          "components/testimonial-section.tsx",
+          "components/newsletter-section.tsx",
+          "components/trending-outfits.tsx"
+        ]
+      },
+      {
+        "name": "Navigation and layout",
+        "description": "App layout, theme provider, and navigation.",
+        "files": [
+          "app/layout.tsx",
+          "components/layout/navbar.tsx",
+          "components/navbar.tsx",
+          "components/theme-provider.tsx",
+          "app/page.tsx",
+          "app/globals.css",
+          "styles/globals.css"
+        ]
+      },
+      {
+        "name": "API and health check",
+        "description": "Health endpoint for readiness checks.",
+        "files": [
+          "app/api/health/route.ts"
+        ]
+      },
+      {
+        "name": "Configuration and constants",
+        "description": "Environment checks, route constants, utils, and validation schemas.",
+        "files": [
+          "components/env-checker.tsx",
+          "components/config-check.tsx",
+          "lib/constants/navigation.ts",
+          "lib/constants/routes.ts",
+          "lib/utils.ts",
+          "lib/utils/validation.ts",
+          "hooks/use-mobile.ts",
+          "hooks/use-toast.ts"
+        ]
+      }
+    ]
+  }
+}

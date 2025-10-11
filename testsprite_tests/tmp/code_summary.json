@@ -1,0 +1,153 @@
+{
+  "tech_stack": [
+    "TypeScript",
+    "Next.js 15",
+    "React 19",
+    "Tailwind CSS",
+    "Supabase (auth + DB)",
+    "Radix UI",
+    "Three.js",
+    "Zod"
+  ],
+  "features": [
+    {
+      "name": "Authentication flows",
+      "description": "Email-based auth with Supabase; login, register, callback, confirm routes and protected route component.",
+      "files": [
+        "app/auth/login/page.tsx",
+        "app/auth/register/page.tsx",
+        "app/auth/callback/route.ts",
+        "app/auth/confirm/page.tsx",
+        "app/auth/confirm/loading.tsx",
+        "components/auth/login-form.tsx",
+        "components/auth/register-form.tsx",
+        "components/auth/protected-route.tsx",
+        "contexts/auth-context.tsx",
+        "app/actions/auth-actions.ts"
+      ]
+    },
+    {
+      "name": "Supabase client utilities",
+      "description": "Typed Supabase clients for browser and server with safe checks and helpers.",
+      "files": [
+        "lib/supabase.ts",
+        "lib/supabase-server.ts",
+        "lib/supabase-safe.ts",
+        "types/supabase.ts"
+      ]
+    },
+    {
+      "name": "Outfit creation and preview",
+      "description": "Create, customize, and preview outfits including 3D model integrations and combinations.",
+      "files": [
+        "app/dashboard/create-outfit/page.tsx",
+        "components/outfit-preview.tsx",
+        "components/outfit-combination-view.tsx",
+        "components/outfit-picker.tsx",
+        "app/preview/page.tsx",
+        "app/outfit-picker/page.tsx",
+        "app/customize/page.tsx",
+        "app/actions/outfit-actions.ts"
+      ]
+    },
+    {
+      "name": "3D models and playground",
+      "description": "Three.js model viewers for avatar and products, plus a playground page.",
+      "files": [
+        "components/3d/avatar-model.tsx",
+        "components/3d/product-model-viewer.tsx",
+        "components/3d-playground/avatar-playground.tsx",
+        "components/three-d-playground.tsx",
+        "app/3d-playground/page.tsx"
+      ]
+    },
+    {
+      "name": "Gallery and product listing",
+      "description": "Gallery grid with filters and loading states; product list and product detail route.",
+      "files": [
+        "app/gallery/page.tsx",
+        "app/gallery/loading.tsx",
+        "components/gallery/gallery-grid.tsx",
+        "components/gallery/gallery-filters.tsx",
+        "components/gallery/gallery-header.tsx",
+        "app/products/page.tsx",
+        "app/products/loading.tsx",
+        "app/products/[id]/page.tsx"
+      ]
+    },
+    {
+      "name": "Cart and checkout",
+      "description": "Cart context and pages with a checkout form.",
+      "files": [
+        "contexts/cart-context.tsx",
+        "app/cart/page.tsx",
+        "app/checkout/page.tsx",
+        "components/cart/cart-page.tsx",
+        "components/checkout-form.tsx"
+      ]
+    },
+    {
+      "name": "User profile and settings",
+      "description": "Profile header, tabs, saved outfits, and settings pages in dashboard and profile.",
+      "files": [
+        "app/profile/page.tsx",
+        "app/profile/settings/page.tsx",
+        "app/dashboard/page.tsx",
+        "app/dashboard/settings/page.tsx",
+        "app/dashboard/settings/settings-client-page.tsx",
+        "components/profile/profile-header.tsx",
+        "components/profile/profile-tabs.tsx",
+        "components/profile/saved-outfits.tsx",
+        "components/profile/settings-tabs.tsx"
+      ]
+    },
+    {
+      "name": "Onboarding flow",
+      "description": "Guided onboarding experience and landing sections.",
+      "files": [
+        "app/onboarding/page.tsx",
+        "components/onboarding/onboarding-flow.tsx",
+        "components/landing-hero.tsx",
+        "components/how-it-works.tsx",
+        "components/feature-cards.tsx",
+        "components/testimonial-section.tsx",
+        "components/newsletter-section.tsx",
+        "components/trending-outfits.tsx"
+      ]
+    },
+    {
+      "name": "Navigation and layout",
+      "description": "App layout, theme provider, and navigation.",
+      "files": [
+        "app/layout.tsx",
+        "components/layout/navbar.tsx",
+        "components/navbar.tsx",
+        "components/theme-provider.tsx",
+        "app/page.tsx",
+        "app/globals.css",
+        "styles/globals.css"
+      ]
+    },
+    {
+      "name": "API and health check",
+      "description": "Health endpoint for readiness checks.",
+      "files": [
+        "app/api/health/route.ts"
+      ]
+    },
+    {
+      "name": "Configuration and constants",
+      "description": "Environment checks, route constants, utils, and validation schemas.",
+      "files": [
+        "components/env-checker.tsx",
+        "components/config-check.tsx",
+        "lib/constants/navigation.ts",
+        "lib/constants/routes.ts",
+        "lib/utils.ts",
+        "lib/utils/validation.ts",
+        "hooks/use-mobile.ts",
+        "hooks/use-toast.ts"
+      ]
+    }
+  ]
+}

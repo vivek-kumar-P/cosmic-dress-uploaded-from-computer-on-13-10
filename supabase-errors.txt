@@ -1,0 +1,19 @@
+Review my Supabase project and resolve the following security errors for all referenced tables:
+
+Multiple tables (categories, colors, product_images, product_models, product_tag_relations, product_tags, product_variants, products, sizes) show RLS (Row Level Security) policies exist but RLS is not enabled.
+
+Several tables are public but RLS is fully disabled.
+
+For each table listed:
+
+Enable RLS (Row Level Security) to enforce security.
+
+Ensure existing RLS policies are properly activated and applied.
+
+Confirm policies restrict access correctly so only authorized users can view or modify sensitive data.
+
+If the policy is “Anyone can view”, leave read access public, but still enable RLS for fine-grained control over edits or sensitive operations.
+
+Test and verify that data is inaccessible to unauthorized or anonymous requests except where public access is explicitly allowed.
+
+Return clear SQL migration scripts or Supabase CLI commands for each table, plus short deployment instructions.
