@@ -55,7 +55,7 @@ export default function AvatarModel({
     const renderer = new THREE.WebGLRenderer({ antialias: true })
     renderer.setSize(containerRef.current.clientWidth, containerRef.current.clientHeight)
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-    renderer.outputEncoding = THREE.sRGBEncoding
+    renderer.outputColorSpace = THREE.SRGBColorSpace
     containerRef.current.appendChild(renderer.domElement)
 
     // Lighting

@@ -43,9 +43,8 @@ export default function OutfitCombinationView({ items }: OutfitCombinationViewPr
     const renderer = new THREE.WebGLRenderer({ antialias: true })
     renderer.setSize(containerRef.current.clientWidth, containerRef.current.clientHeight)
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-    // Updated for newer three.js versions
-    // @ts-ignore - present at runtime on modern three builds
-    renderer.outputColorSpace = (THREE as any).SRGBColorSpace ?? (THREE as any).sRGBEncoding
+    // Use SRGBColorSpace for modern Three.js versions
+    renderer.outputColorSpace = THREE.SRGBColorSpace
     containerRef.current.appendChild(renderer.domElement)
 
     // Lighting
