@@ -31,3 +31,11 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# OS artifacts
+.DS_Store
+Thumbs.db
+
+# AI scratch (temporary working files — never commit)
+.ai/scratch/*
+!.ai/scratch/README.md
