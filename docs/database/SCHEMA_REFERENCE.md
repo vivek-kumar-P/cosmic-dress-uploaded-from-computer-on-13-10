@@ -239,7 +239,6 @@ Extends `auth.users` with user-facing profile data. The `id` column is a 1:1 FK 
 | `state` | text | NULL | — | State / province |
 | `postal_code` | text | NULL | — | Postal / ZIP code |
 | `country` | text | NULL | — | Country |
-| `address` | text | NULL | — | Combined address (legacy field) |
 | `onboarding_completed` | boolean | NULL | `false` | Whether the user has completed the onboarding wizard |
 | `created_at` | timestamptz | NULL | `now()` | Row creation timestamp |
 | `updated_at` | timestamptz | NULL | `now()` | Last update timestamp |
@@ -546,5 +545,49 @@ Required for `uuid_generate_v4()` used as default primary key values.
 | `favorites` | ✅ | ❌ | Own rows |
 | `orders` | ✅ | ❌ | Own rows |
 | `order_items` | ✅ | ❌ | Own rows (via order) |
+| `user_addresses` | ✅ | ❌ | Own rows |
+| `user_preferences` | ✅ | ❌ | Own row only |
 
 See [SECURITY_MODEL.md](../architecture/SECURITY_MODEL.md) for detailed policy SQL.
+
+---
+
+### `user_addresses`
+
+Stores multiple shipping addresses per user. Introduced in migration `26-create-onboarding-database-foundation.sql`.
+
+| Column | Type | Nullable | Default | Description |
+|--------|------|---------|---------|-------------|
+| `id` | uuid | NOT NULL | `uuid_generate_v4()` | Primary key |
+| `user_id` | uuid | NOT NULL | — | FK to `auth.users(id)` |
+| `full_name` | text | NULL | — | Full name for this address |
+| `phone` | text | NULL | — | Contact phone for this address |
+| `address_line_1` | text | NOT NULL | — | Street address line 1 |
+| `address_line_2` | text | NULL | — | Street address line 2 (apt, suite, etc.) |
+| `city` | text | NOT NULL | — | City |
+| `state` | text | NULL | — | State / province |
+| `country` | text | NOT NULL | — | Country |
+| `postal_code` | text | NULL | — | Postal / ZIP code |
+| `is_default` | boolean | NULL | `false` | Whether this is the user's default address |
+| `created_at` | timestamptz | NULL | `now()` | Row creation timestamp |
+| `updated_at` | timestamptz | NULL | `now()` | Last update timestamp |
+
+**Constraint:** A database trigger (`ensure_single_default_address_trigger`) ensures only one address per user can have `is_default = true`.
+
+---
+
+### `user_preferences`
+
+Stores a user's explicit fashion preferences for use in personalization and future recommendations. Introduced in migration `26-create-onboarding-database-foundation.sql`.
+
+| Column | Type | Nullable | Default | Description |
+|--------|------|---------|---------|-------------|
+| `id` | uuid | NOT NULL | `uuid_generate_v4()` | Primary key |
+| `user_id` | uuid | NOT NULL UNIQUE | — | FK to `auth.users(id)`, one record per user |
+| `preferred_styles` | text[] | NULL | — | Array of style preferences (e.g., casual, formal) |
+| `preferred_colors` | text[] | NULL | — | Array of preferred colors |
+| `preferred_sizes` | text[] | NULL | — | Array of clothing sizes |
+| `preferred_categories` | text[] | NULL | — | Array of preferred product categories |
+| `preferred_occasions` | text[] | NULL | — | Array of occasions (e.g., work, wedding) |
+| `created_at` | timestamptz | NULL | `now()` | Row creation timestamp |
+| `updated_at` | timestamptz | NULL | `now()` | Last update timestamp |

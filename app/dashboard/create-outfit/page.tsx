@@ -1,5 +1,6 @@
 "use client"
 
+import ProtectedRoute from "@/components/auth/protected-route"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -94,6 +95,7 @@ export default function CreateOutfitPage() {
   }
 
   return (
+    <ProtectedRoute requireOnboarding>
     <div className="min-h-screen bg-gradient-to-br from-[#0A0A1A] via-[#1A1A3A] to-[#2A1A4A] p-4 pt-24">
       <div className="max-w-7xl mx-auto space-y-6">
         {/* Header */}
@@ -343,5 +345,6 @@ export default function CreateOutfitPage() {
         )}
       </div>
     </div>
+    </ProtectedRoute>
   )
 }

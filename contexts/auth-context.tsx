@@ -1,6 +1,6 @@
 "use client"
 
-import { createContext, useContext, useEffect, useState, type ReactNode } from "react"
+import { createContext, useContext, useEffect, useRef, useState, type ReactNode } from "react"
 import type { User, Session } from "@supabase/supabase-js"
 import { getSupabaseClient } from "@/lib/supabase"
 import { useRouter } from "next/navigation"
@@ -19,6 +19,7 @@ interface Profile {
   state?: string
   postal_code?: string
   country?: string
+  gender?: string
   onboarding_completed?: boolean
   created_at?: string
   updated_at?: string
@@ -31,7 +32,7 @@ interface AuthContextType {
   loading: boolean
   isAuthenticated: boolean
   signUp: (email: string, password: string, userData?: any) => Promise<{ success: boolean; error: string | null }>
-  signIn: (email: string, password: string) => Promise<{ success: boolean; error: string | null }>
+  signIn: (email: string, password: string) => Promise<{ success: boolean; onboardingCompleted?: boolean; error: string | null }>
   signOut: () => Promise<void>
   updateProfile: (updates: Partial<Profile>) => Promise<{ success: boolean; error: string | null }>
   refreshProfile: () => Promise<void>
@@ -44,10 +45,22 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null)
   const [session, setSession] = useState<Session | null>(null)
   const [profile, setProfile] = useState<Profile | null>(null)
+  /**
+   * `loading` stays true until BOTH the session AND profile fetch are complete.
+   * This prevents ProtectedRoute from making premature redirect decisions when
+   * the session is known but the profile hasn't loaded yet.
+   */
   const [loading, setLoading] = useState(true)
   const router = useRouter()
 
   const supabase = getSupabaseClient()
+
+  /**
+   * When signIn() explicitly fetches the profile and sets it, we use this ref
+   * to signal onAuthStateChange that it should skip its own fetchProfile on the
+   * upcoming SIGNED_IN event — preventing a redundant double-fetch race.
+   */
+  const skipNextProfileFetch = useRef(false)
 
   const fetchProfile = async (userId: string): Promise<Profile | null> => {
     if (!supabase) {
@@ -59,8 +72,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       const { data, error } = await supabase.from("profiles").select("*").eq("id", userId).single()
 
       if (error) {
-        // If profile doesn't exist, create it asynchronously in the background
-        if (error.code === 'PGRST116') {
+        // Profile doesn't exist yet — create it
+        if (error.code === "PGRST116") {
           const currentUser = await supabase.auth.getUser()
           const newProfile = {
             id: userId,
@@ -93,7 +106,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const refreshProfile = async () => {
     if (!user) return
-
     const profileData = await fetchProfile(user.id)
     setProfile(profileData)
   }
@@ -141,15 +153,24 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         return { success: false, error: error.message }
       }
 
-      // Fetch profile asynchronously without blocking the response
+      let onboardingCompleted = false
       if (data?.user) {
-        fetchProfile(data.user.id).then(setProfile).catch(console.error)
+        // Explicitly fetch profile here so we can read onboarding_completed
+        // synchronously for the redirect decision in LoginForm.
+        // Signal the onAuthStateChange listener to skip its own fetch for the
+        // upcoming SIGNED_IN event to prevent a redundant double-fetch.
+        skipNextProfileFetch.current = true
+        const userProfile = await fetchProfile(data.user.id)
+        if (userProfile) {
+          setProfile(userProfile)
+          onboardingCompleted = !!userProfile.onboarding_completed
+        }
       }
 
-      return { success: true, error: null }
+      return { success: true, onboardingCompleted, error: null }
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : "An error occurred during sign in"
-      return { success: false, error: errorMessage }
+      return { success: false, onboardingCompleted: false, error: errorMessage }
     }
   }
 
@@ -188,7 +209,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         })
         .eq("id", user.id)
         .select()
-        .limit(1)
 
       if (error) {
         return { success: false, error: error.message }
@@ -220,7 +240,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         })
         .eq("id", user.id)
         .select()
-        .limit(1)
 
       if (error) {
         return { success: false, error: error.message }
@@ -243,33 +262,45 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       return
     }
 
-    // Get initial session
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session)
-      setUser(session?.user ?? null)
-
-      if (session?.user) {
-        fetchProfile(session.user.id).then(setProfile)
-      }
-
-      setLoading(false)
-    })
-
-    // Listen for auth changes
+    /**
+     * Use onAuthStateChange as the single source of truth for session state.
+     * The INITIAL_SESSION event fires immediately on mount with the current
+     * session (equivalent to a getSession() call), so we don't need a separate
+     * getSession() call which would cause a double fetchProfile race.
+     *
+     * IMPORTANT: loading stays true until fetchProfile completes, so that
+     * ProtectedRoute never makes redirect decisions with stale (null) profile data.
+     */
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange(async (event, session) => {
       setSession(session)
       setUser(session?.user ?? null)
 
-      // Only fetch profile on initial sign in or user updates, not on every state change
-      if (session?.user && (event === 'SIGNED_IN' || event === 'USER_UPDATED')) {
-        fetchProfile(session.user.id).then(setProfile).catch(console.error)
-      } else if (!session?.user) {
+      if (session?.user) {
+        if (event === "SIGNED_IN" && skipNextProfileFetch.current) {
+          // signIn() already fetched and set the profile — skip duplicate fetch.
+          // Profile is already set, so we can mark loading as done immediately.
+          skipNextProfileFetch.current = false
+          setLoading(false)
+        } else {
+          // INITIAL_SESSION (page load/navigation), TOKEN_REFRESHED, USER_UPDATED,
+          // or a SIGNED_IN from OAuth/magic-link (no prior explicit signIn() call).
+          // Keep loading=true while profile fetches, then clear it when done.
+          fetchProfile(session.user.id)
+            .then((profileData) => {
+              setProfile(profileData)
+            })
+            .catch(console.error)
+            .finally(() => {
+              setLoading(false)
+            })
+        }
+      } else {
+        // SIGNED_OUT or session expired — clear profile and unblock loading
         setProfile(null)
+        setLoading(false)
       }
-
-      setLoading(false)
     })
 
     return () => subscription.unsubscribe()

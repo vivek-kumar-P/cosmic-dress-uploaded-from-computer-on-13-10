@@ -68,11 +68,11 @@ export default function ProfileHeader() {
                 </div>
               )}
 
-              {(profile.address || profile.city || profile.state || profile.country) && (
+              {(profile.street_address || profile.city || profile.state || profile.country) && (
                 <div className="flex items-center gap-2 text-zinc-300">
                   <MapPin className="h-4 w-4 text-[#00C4B4]" />
                   <span>
-                    {[profile.address, profile.city, profile.state, profile.country].filter(Boolean).join(", ")}
+                    {[profile.street_address, profile.city, profile.state, profile.country].filter(Boolean).join(", ")}
                   </span>
                 </div>
               )}

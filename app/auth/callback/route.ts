@@ -21,6 +21,7 @@ export async function GET(request: NextRequest) {
 
       if (data.user) {
         // Check if profile exists, create if it doesn't
+        let onboardingCompleted = false
         const { data: profile, error: profileError } = await supabase
           .from("profiles")
           .select("*")
@@ -35,14 +36,21 @@ export async function GET(request: NextRequest) {
             full_name: data.user.user_metadata?.full_name || data.user.email?.split("@")[0] || "User",
             avatar_url: null,
             bio: null,
+            onboarding_completed: false,
           })
 
           if (createError) {
             console.error("Error creating profile:", createError)
           }
+        } else if (profile) {
+          onboardingCompleted = !!(profile as any).onboarding_completed
         }
 
-        // Redirect to dashboard or intended page
+        // Redirect to onboarding or dashboard
+        if (!onboardingCompleted) {
+          return NextResponse.redirect(new URL("/onboarding", request.url))
+        }
+
         return NextResponse.redirect(new URL(next === "/" ? "/dashboard" : next, request.url))
       }
     } catch (error) {

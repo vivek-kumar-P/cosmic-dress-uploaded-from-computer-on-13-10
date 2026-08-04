@@ -3,7 +3,7 @@
 import type React from "react"
 
 import { useState } from "react"
-import { useRouter } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
 import { useAuth } from "@/contexts/auth-context"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -13,9 +13,24 @@ import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Loader, Mail, Lock, AlertCircle } from "lucide-react"
 import Link from "next/link"
 
+/**
+ * Validates that a redirect target is a safe internal path.
+ */
+function isValidInternalPath(path: string | null): path is string {
+  if (!path || typeof path !== "string") return false
+  if (!path.startsWith("/")) return false
+  if (path.includes("://")) return false
+  if (path.startsWith("//")) return false
+  return true
+}
+
 export default function LoginForm() {
   const { signIn } = useAuth()
   const router = useRouter()
+  const searchParams = useSearchParams()
+
+  // Read the `next` redirect destination from URL query
+  const nextParam = searchParams.get("next")
 
   const [formData, setFormData] = useState({
     email: "",
@@ -34,19 +49,33 @@ export default function LoginForm() {
     setIsLoading(true)
     setError(null)
 
+    let redirectTo: string | null = null
+
     try {
       const result = await signIn(formData.email, formData.password)
 
       if (result.success) {
-        // Immediately redirect without waiting for profile fetch
-        router.push("/dashboard")
+        // Determine redirect destination — evaluated here, executed after finally
+        if (!result.onboardingCompleted) {
+          redirectTo = "/onboarding"
+        } else if (isValidInternalPath(nextParam)) {
+          redirectTo = nextParam
+        } else {
+          redirectTo = "/dashboard"
+        }
       } else {
         setError(result.error || "Failed to sign in")
-        setIsLoading(false)
       }
     } catch (err) {
       setError("An unexpected error occurred")
+    } finally {
+      // Always reset the loading state, regardless of outcome
       setIsLoading(false)
+    }
+
+    // Redirect only after loading state has been cleared
+    if (redirectTo) {
+      router.push(redirectTo)
     }
   }
 

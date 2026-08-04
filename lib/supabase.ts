@@ -1,20 +1,16 @@
-import { createClient } from "@supabase/supabase-js"
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs"
 import type { Database } from "@/types/supabase"
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || process.env.SUPABASE_ANON_KEY
 
-// Create a safe client that won't throw errors during build
-let supabaseClient: ReturnType<typeof createClient<Database>> | null = null
+let supabaseClient: ReturnType<typeof createClientComponentClient<Database>> | null = null
 
 if (supabaseUrl && supabaseAnonKey) {
   try {
-    supabaseClient = createClient<Database>(supabaseUrl, supabaseAnonKey, {
-      auth: {
-        autoRefreshToken: true,
-        persistSession: true,
-        detectSessionInUrl: true,
-      },
+    supabaseClient = createClientComponentClient<Database>({
+      supabaseUrl,
+      supabaseKey: supabaseAnonKey,
     })
   } catch (error) {
     console.error("Failed to initialize Supabase client:", error)
@@ -28,15 +24,21 @@ export const isSupabaseConfigured = (): boolean => {
 
 // Safe getter for the Supabase client
 export const getSupabaseClient = () => {
-  if (!supabaseClient) {
-    console.warn("Supabase client is not configured. Please check your environment variables.")
-    return null
+  if (!supabaseClient && supabaseUrl && supabaseAnonKey) {
+    try {
+      supabaseClient = createClientComponentClient<Database>({
+        supabaseUrl,
+        supabaseKey: supabaseAnonKey,
+      })
+    } catch (error) {
+      console.error("Error creating Supabase client:", error)
+    }
   }
   return supabaseClient
 }
 
 // Named export for compatibility
-export const supabase = supabaseClient
+export const supabase = (supabaseClient || getSupabaseClient()) as ReturnType<typeof createClientComponentClient<Database>>
 
 // Default export for backward compatibility
-export default supabaseClient
+export default supabase

@@ -140,7 +140,6 @@ CREATE TABLE public.profiles (
   state text,
   postal_code text,
   country text,
-  address text,
   onboarding_completed boolean DEFAULT false,
   created_at timestamp with time zone DEFAULT now(),
   updated_at timestamp with time zone DEFAULT now(),
@@ -230,7 +229,36 @@ CREATE TABLE public.order_items (
   quantity integer NOT NULL,
   price numeric NOT NULL,
   created_at timestamp with time zone DEFAULT now(),
-  CONSTRAINT order_items_pkey PRIMARY KEY (id),
-  CONSTRAINT order_items_order_id_fkey FOREIGN KEY (order_id) REFERENCES public.orders(id),
-  CONSTRAINT order_items_product_id_fkey FOREIGN KEY (product_id) REFERENCES public.products(id)
+);
+
+CREATE TABLE public.user_addresses (
+  id uuid NOT NULL DEFAULT uuid_generate_v4(),
+  user_id uuid NOT NULL,
+  full_name text,
+  phone text,
+  address_line_1 text NOT NULL,
+  address_line_2 text,
+  city text NOT NULL,
+  state text,
+  country text NOT NULL,
+  postal_code text,
+  is_default boolean DEFAULT false,
+  created_at timestamp with time zone DEFAULT now(),
+  updated_at timestamp with time zone DEFAULT now(),
+  CONSTRAINT user_addresses_pkey PRIMARY KEY (id),
+  CONSTRAINT user_addresses_user_id_fkey FOREIGN KEY (user_id) REFERENCES auth.users(id)
+);
+
+CREATE TABLE public.user_preferences (
+  id uuid NOT NULL DEFAULT uuid_generate_v4(),
+  user_id uuid NOT NULL UNIQUE,
+  preferred_styles text[],
+  preferred_colors text[],
+  preferred_sizes text[],
+  preferred_categories text[],
+  preferred_occasions text[],
+  created_at timestamp with time zone DEFAULT now(),
+  updated_at timestamp with time zone DEFAULT now(),
+  CONSTRAINT user_preferences_pkey PRIMARY KEY (id),
+  CONSTRAINT user_preferences_user_id_fkey FOREIGN KEY (user_id) REFERENCES auth.users(id)
 );

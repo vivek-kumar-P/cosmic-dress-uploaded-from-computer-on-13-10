@@ -1,3 +1,5 @@
+"use client"
+
 import CheckoutForm from "@/components/checkout-form"
 import ProtectedRoute from "@/components/auth/protected-route"
 

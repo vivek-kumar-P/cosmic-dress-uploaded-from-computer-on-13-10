@@ -60,6 +60,7 @@ Only run individual scripts (01–25) if debugging a specific migration.
 | 23 | `23-add-missing-foreign-key-indexes.sql` | Second pass: adds remaining FK indexes missed in script 17 | ✅ Applied |
 | 24 | `24-fix-trigger-search-path.sql` | Sets `search_path = public` on all trigger functions to prevent schema injection | ✅ Applied |
 | 25 | `25-secure-trigger-functions-final.sql` | Final hardening of all trigger functions: `SECURITY DEFINER`, explicit `search_path`, reviewed for privilege escalation | ✅ Applied |
+| 26 | `26-create-onboarding-database-foundation.sql` | Database setup for onboarding: creates `user_addresses` and `user_preferences` tables with optimized RLS and indexes; cleans up duplicate profiles address fields | ⏳ Generated (Awaiting user apply) |
 
 ---
 

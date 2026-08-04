@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
+import ProtectedRoute from "@/components/auth/protected-route"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -148,18 +149,16 @@ ${order.items
     URL.revokeObjectURL(url)
   }
 
-  if (isLoading) {
-    return (
+  return (
+    <ProtectedRoute requireOnboarding>
+    {isLoading ? (
       <div className="min-h-screen bg-gradient-to-b from-[#0A0A1A] to-[#1A1A3A] flex items-center justify-center">
         <div className="text-center">
           <div className="w-16 h-16 border-4 border-[#00C4B4] border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
           <p className="text-white">Loading orders...</p>
         </div>
       </div>
-    )
-  }
-
-  return (
+    ) : (
     <div className="min-h-screen bg-gradient-to-b from-[#0A0A1A] to-[#1A1A3A] text-white py-20 px-4 pt-24">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
@@ -351,5 +350,7 @@ ${order.items
         </motion.div>
       </div>
     </div>
+    )}
+    </ProtectedRoute>
   )
 }
